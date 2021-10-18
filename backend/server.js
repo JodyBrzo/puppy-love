@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const routes = require("./routes")
+const routes = require("./routes");
 
 require('dotenv').config();
 
@@ -21,7 +21,6 @@ connection.once('open', () => {
 })
 
 app.use(routes);
-
 
 app.listen (port, () => {
     console.log(`listening on port: ${port}`);
