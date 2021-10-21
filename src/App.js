@@ -1,9 +1,9 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './components/navbar.component';
-import PuppyList from './components/puppy-list.component';
 import CreatePuppy from './pages/Create';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import Puppies from './pages/Puppies';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import PuppiesProvider from './Providers/Puppies/puppies.provider';
 
 function App() {
@@ -13,8 +13,10 @@ function App() {
       <Navbar />
       <br/>
         <PuppiesProvider>
-          <Route path="/" exact component={PuppyList} />
-          <Route path="/create" component={CreatePuppy} />
+          <Switch>
+            <Route path="/" exact component={Puppies} />
+            <Route path="/create" component={CreatePuppy} />
+          </Switch>
         </PuppiesProvider>
       </div>
     </Router>

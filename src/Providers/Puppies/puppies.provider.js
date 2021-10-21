@@ -4,7 +4,7 @@ import puppiesTypes from './puppies.types';
 
 export const PuppiesContext = createContext(PUPPIES_INITIAL_STATE);
 
-const PuppiesProvider = ({ children }) => {
+const PuppiesProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useReducer(puppiesReducer, PUPPIES_INITIAL_STATE);
   const { puppies } = state;
 
@@ -27,9 +27,7 @@ const PuppiesProvider = ({ children }) => {
       puppies, 
       createPuppy,
       getPuppies
-    )}>
-      {children}
-    </PuppiesContext.Provider>
+    )} />
   );
 }
 
