@@ -9,9 +9,8 @@ const puppiesReducer = (state, action) => {
     case puppyTypes.GET_PUPPIES:
       return{
         ...state,
-        puppies: [
-          action.payload
-        ]
+        puppies: action.payload
+        
       };
 
     case puppyTypes.CREATE_PUPPY:

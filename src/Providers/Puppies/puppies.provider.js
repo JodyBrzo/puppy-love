@@ -1,14 +1,14 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer, useContext } from 'react';
 import puppiesReducer, { PUPPIES_INITIAL_STATE } from './puppies.reducer';
 import puppiesTypes from './puppies.types';
 
 export const PuppiesContext = createContext(PUPPIES_INITIAL_STATE);
 
-const PuppiesProvider = ({ value = [], ...props }) => {
+const PuppiesProvider = (props) => {
   const [state, dispatch] = useReducer(puppiesReducer, PUPPIES_INITIAL_STATE);
   const { puppies } = state;
 
-  const getPuppies = puppies => {
+  const getAllPuppies = puppies => {
     dispatch ({ 
       type: puppiesTypes.GET_PUPPIES,
       payload: puppies
@@ -23,12 +23,20 @@ const PuppiesProvider = ({ value = [], ...props }) => {
   };
 
   return (
-    <PuppiesContext.Provider value={(
-      puppies, 
+    <PuppiesContext.Provider value={[
+      state,
+      dispatch, 
       createPuppy,
-      getPuppies
-    )} />
+      getAllPuppies
+    ]}>
+      {props.children}
+    </PuppiesContext.Provider>
   );
 }
 
-export default PuppiesProvider;
+const usePuppiesContext = () => {
+  return useContext(PuppiesContext);
+};
+
+export { PuppiesProvider, usePuppiesContext };
+// export default PuppiesProvider;

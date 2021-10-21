@@ -2,24 +2,33 @@ import React, {Component, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import API from '../utils/API';
 import Table from 'react-bootstrap/Table';
-import usePuppyContext from '../Providers/Puppies/puppies.provider';
+import {usePuppiesContext} from '../Providers/Puppies/puppies.provider';
+import puppiesTypes from '../Providers/Puppies/puppies.types';
 
 const PuppyList = () => {
+  console.log ("we are in puppyList function");
 
-  const [state, dispatch] = usePuppyContext();
+  const [state, dispatch, createPuppy, getPuppyData] = usePuppiesContext();
 
   const getPuppies = () => {
-    API.getAllPuppies()
+    console.log ("we are in getPuppies function")
+    API.getAllThePuppies()
       .then(results => {
-        usePuppyContext.getPuppies(results.data);
+        // getPuppyData(results.data);
+        dispatch ({ 
+          type: puppiesTypes.GET_PUPPIES,
+          payload: results.data
+        });
       })
       .catch (err => console.log(err));
   }
 
   useEffect(() => {
+    console.log ("we are in useEffect");
     getPuppies();
   }, []);
-  
+
+
   const Puppy = props => (
     <tr>
       <td>{props.puppy.name}</td>
@@ -27,17 +36,20 @@ const PuppyList = () => {
       <td>{props.puppy.mother}</td>
       <td>{props.puppy.father}</td>
       <td>{props.puppy.birthDate.substring(0,10)}</td>
-      <td>{props.puppy.deceasedDate.substring(0,10)}</td>
+      <td>{props.puppy.deceasedDate ? props.puppy.deceasedDate.substring(0,10) : ''}</td>
       <td>
-        <Link to={"/edit/"+props.exercise._id}>edit</Link> | <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>delete</a>
+        <Link to={"/edit/"+props.puppy._id}>edit</Link> | <a href="#" onClick={() => { props.deletePuppy(props.puppy._id) }}>delete</a>
       </td>
     </tr>
   )
   
-  const puppyList = () => {
-    return this.state.puppies.map(currentPuppy => {
-      return <Puppy puppy={currentPuppy} deletePuppy={this.deletePuppy} key={currentPuppy._id}/>;
-    })
+  const renderPuppies = () => {
+    console.log("A list of puppies", state.puppies);
+    if(state.puppies && state.puppies.length > 0) {
+      return state.puppies.map(currentPuppy => {
+        return <Puppy puppy={currentPuppy} deletePuppy={deletePuppy} key={currentPuppy._id}/>;
+      })
+    }
   }
 
   const deletePuppy = (puppyId) => {
@@ -50,15 +62,17 @@ const PuppyList = () => {
         <Table>
             <thead>
               <tr>
-                <th>Username</th>
-                <th>Description</th>
-                <th>Duration</th>
-                <th>Date</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Mother</th>
+                <th>Father</th>
+                <th>Birth Date</th>
+                <th>Deceased Date</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              { puppyList() }
+              { renderPuppies() }
             </tbody>
           </Table>
     </div>
