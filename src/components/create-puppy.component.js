@@ -1,118 +1,37 @@
-import React, {Component} from 'react';
+import React, {useState, useContext} from 'react';
+import { useHistory } from 'react-router-dom';
 import DateTimePicker from 'react-datetime-picker';
+import {usePuppiesContext} from '../Providers/Puppies/puppies.provider';
+import API from '../utils/API';
 
+const INITIAL_STATE = {
+  name: '',
+  gender: 'Male',
+  mother: '',
+  father: '',
+  birthDate: '',
+  deceasedDate: ''
+};
 
-export default class CreatePuppy extends Component {
-  constructor(props) {
-    super(props);
+const CreatePuppy = props => {
 
-    this.onChangeName = this.onChangeName.bind(this);
-    this.onChangeGender = this.onChangeGender.bind(this);
-    this.onChangeMother = this.onChangeMother.bind(this);
-    this.onChangeFather = this.onChangeFather.bind(this);
-    this.OnChangeBirthDate = this.onChangeBirthDate.bind(this);
-    this.onChangeDeceasedDate = this.onChangeDeceasedDate.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+  const history = useHistory();
+  const [state, dispatch, createPuppy, getPuppyData] = usePuppiesContext();
+  const [formValues, setFormValues] = useState({...INITIAL_STATE});
 
-    this.state = {
-      
-      name: '',
-      gender: '',
-      mother: '',
-      father: '',
-      birthDate: '',
-      deceasedDate: '',
-    //   tempature: [
-    //     {
-    //       date: new Date(),
-    //       tempature: '',
-    //       note: '',
-    //     }
-    //   ],
-    //   weight: [
-    //     {
-    //       date: new Date(),
-    //       weight: '',
-    //       note: '',
-    //     }
-    //   ],
-    //   furDescription: [
-    //     {
-    //       date: new Date(),
-    //       furDescription: '',
-    //       note: '',
-    //     }
-    //   ],
-    //   umbilicus: [
-    //     {
-    //       date: new Date(),
-    //       umbilicus: '',
-    //       note: '',
-    //     }
-    //   ],
-    //   eyes: [
-    //     {
-    //       date: new Date(),
-    //       furDescription: '',
-    //       note: '',
-    //     }
-    //   ],
-    //   ears: [
-    //     {
-    //       date: new Date(),
-    //       ears: '',
-    //       note: '',
-    //     }
-    //   ],
-    //   nails: [
-    //     {
-    //       date: new Date(),
-    //       nails: '',
-    //       note: '',
-    //     }
-    //   ]
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-
-    })
-  }
-
-  onChangeName(e) {
-    this.setState({
-      name: e.target.value
-    });
-  }
-
-  onChangeGender(e) {
-    this.setState({
-      gender: e.target.value
-    });
-  }
-
-  onChangeMother(e) {
-    this.setState({
-      mother: e.target.value
-    });
-  }
-
-  onChangeFather(e) {
-    this.setState({
-      father: e.target.value
-    });
-  }
-
-  onChangeBirthDate(date) {
-    console.log(this);
-    this.setState({
-      birthDate: date
-    });
-  }
-  onChangeDeceasedChecked(date) {
+  const handleInput = evt => {
     let element = document.getElementById("deceasedDatePicker");
     let checkbox = document.getElementById("flexCheckDefault");
+
+    console.log ("is evt: ", evt.target.value);
+    console.log ("dorm value: ", formValues.name);
+    if (!evt) return;
+
+    const { value, name } = evt.target;
+    setFormValues({
+      ...formValues,
+      [name]: value
+    });
     
     if (checkbox.checked) {
       element.classList.add("visible");
@@ -122,102 +41,111 @@ export default class CreatePuppy extends Component {
       element.classList.remove("visible");
       element.classList.add("invisible");
     }
-    
+
+  };
+
+  const handleBirthDateInput = (date) => {
+    setFormValues({
+      ...formValues,
+      birthDate: date
+    });
   }
-  onChangeDeceasedDate(date) {
-    this.setState({
+
+  const handleDeceasedDateInput = (date) => {
+    setFormValues({
+      ...formValues,
       deceasedDate: date
     });
   }
 
-  onSubmit(e) {
-    e.preventDefault();
+  const handleSubmit = evt => {
+    evt.preventDefault();
 
-    console.log(this);
+    console.log(formValues);
 
-    const puppy = {
-      name: this.state.name,
-      gender: this.state.gender,
-      mother: this.state.mother,
-      father: this.state.father,
-      birthDate: this.state.birthDate,
-      deceasedDate: this.state.deceasedDate
-    }
+    API.createPuppy(formValues)
+      .then(results => {
+        createPuppy(formValues);
+        history.push('/');
+      })
+      .catch (err => console.log(err));
+  };
 
-    console.log(puppy);
-
-    // window.location = '/';
-  }
-
-  render() {
-    return(
-      <div>
-        <h3>Create puppy Component</h3>
-        <form onSubmit={this.onSubmit}>
+  return(
+    <div>
+      <h3>Create puppy Component</h3>
+      <form onSubmit={handleSubmit}>
+      <div className="form-group">
+          <label>Name</label>
+          <input  type="text"
+            name="name"
+            required
+            className="form-control"
+            value={formValues.name}
+            onChange={handleInput}
+            />
+        </div>
         <div className="form-group">
-            <label>Name</label>
-            <input  type="text"
-              required
-              className="form-control"
-              value={this.state.name}
-              onChange={this.onChangeName}
-              />
-          </div>
-          <div className="form-group">
-            <label>Gender</label>
-            <select className="form-control" 
-              required
-              value={this.state.gender}
-              onChange={this.onChangeGender}>
-              <option>Male</option>
-              <option>Female</option>
-            </select>
-          </div>
-          <div className="form-group">
-            <label>Mother's Name</label>
-            <input  type="text"
-              required
-              className="form-control"
-              value={this.state.mother}
-              onChange={this.onChangeMother}
-              />
-          </div>
-          <div className="form-group">
-            <label>Father's Name</label>
-            <input  type="text"
-              required
-              className="form-control"
-              value={this.state.father}
-              onChange={this.onChangeFather}
-              />
-          </div>
-          <div className="form-group">
-            <label>Birth Date</label>
-            <DateTimePicker 
-              value={this.state.birthDate}
-              onChange={this.onChangeBirthDate}
+          <label>Gender</label>
+          <select className="form-control" 
+            name="gender"
+            required
+            value={formValues.gender}
+            onChange={handleInput}>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Mother's Name</label>
+          <input  type="text"
+            name="mother"
+            required
+            className="form-control"
+            value={formValues.mother}
+            onChange={handleInput}
             />
-          </div>
-          <div className="form-group">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value={this.state.onChangeDeceasedDate} onChange={this.onChangeDeceasedChecked} id="flexCheckDefault"/>
-              <label class="form-check-label" for="flexCheckDefault">
-                Deceased
-              </label>
-            </div>
-          </div>
-          <div className="form-group invisible" id="deceasedDatePicker">
-            <label>Deceased Date</label>
-            <DateTimePicker 
-              value={this.state.deceasedDate}
-              onChange={this.onChangeDeceasedDate}
+        </div>
+        <div className="form-group">
+          <label>Father's Name</label>
+          <input  type="text"
+            name="father"
+            required
+            className="form-control"
+            value={formValues.father}
+            onChange={handleInput}
             />
+        </div>
+        <div className="form-group">
+          <label>Birth Date</label>
+          <DateTimePicker 
+            name="birthDate"
+            value={formValues.birthDate}
+            onChange={handleBirthDateInput}
+          />
+        </div>
+        <div className="form-group">
+          <div className="form-check">
+            <input className="form-check-input" type="checkbox" value={formValues.deceasedDate} onChange={handleInput} id="flexCheckDefault"/>
+            <label className="form-check-label">
+              Deceased
+            </label>
           </div>
-          <div className="form-group">
-            <input type="submit" value="Create Exercise Log" className="btn btn-primary" />
-          </div>
-        </form>
-      </div>
-    )
-  }
-}
+        </div>
+        <div className="form-group invisible" id="deceasedDatePicker">
+          <label>Deceased Date</label>
+          <DateTimePicker 
+            name="deceasedDate"
+            value={formValues.deceasedDate}
+            onChange={handleDeceasedDateInput}
+          />
+        </div>
+        <div className="form-group">
+          <input type="submit" value="Add A Puppy" className="btn btn-primary" />
+        </div>
+      </form>
+    </div>
+  )
+};
+
+export default CreatePuppy;
