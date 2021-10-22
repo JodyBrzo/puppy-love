@@ -14,6 +14,8 @@ const puppiesReducer = (state, action) => {
       };
 
     case puppyTypes.CREATE_PUPPY:
+      console.log("action.payload: ", action.payload);
+      console.log("state.puppies: ", state.puppies);
       return{
         ...state,
         puppies: [

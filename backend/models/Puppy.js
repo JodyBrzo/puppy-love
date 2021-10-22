@@ -112,7 +112,7 @@ const PuppySchema = new Schema ({
   vaccine: [{type: VaccineSchema}],
   vetCheck: [{type: VetCheckSchema}],
   notes: [{type: NotesSchema}]
-});
+}, {timestamps: {} } );
 
 const Puppy = mongoose.model("Puppy", PuppySchema);
 module.exports = Puppy;

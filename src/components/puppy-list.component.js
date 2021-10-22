@@ -12,15 +12,17 @@ const PuppyList = () => {
 
   const getPuppies = () => {
     console.log ("we are in getPuppies function")
-    API.getAllThePuppies()
-      .then(results => {
-        // getPuppyData(results.data);
-        dispatch ({ 
-          type: puppiesTypes.GET_PUPPIES,
-          payload: results.data
-        });
-      })
-      .catch (err => console.log(err));
+    if(state.puppies.length === 0) {
+      API.getAllThePuppies()
+        .then(results => {
+          // getPuppyData(results.data);
+          dispatch ({ 
+            type: puppiesTypes.GET_PUPPIES,
+            payload: results.data
+          });
+        })
+        .catch (err => console.log(err));
+   }
   }
 
   useEffect(() => {

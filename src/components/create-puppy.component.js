@@ -65,7 +65,7 @@ const CreatePuppy = props => {
 
     API.createPuppy(formValues)
       .then(results => {
-        createPuppy(formValues);
+        createPuppy(results.data);
         history.push('/');
       })
       .catch (err => console.log(err));
