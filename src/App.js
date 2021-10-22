@@ -1,24 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './components/navbar.component';
+import CreatePuppy from './pages/Create';
+import PuppiesPage from './pages/Puppies';
+import Wrapper from './components/wrapper';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {PuppiesProvider} from './Providers/Puppies/puppies.provider';
 
-function App() {
+function App (props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="container">
+      <Navbar />
+      <br/>
+        <PuppiesProvider> 
+          {/* <Wrapper> */}
+            <Switch>
+              <Route path="/" exact component={PuppiesPage} />
+              <Route path="/create" component={CreatePuppy} />
+            </Switch>
+          {/* </Wrapper> */}
+        </PuppiesProvider> 
+      </div>
+    </Router>
   );
 }
 

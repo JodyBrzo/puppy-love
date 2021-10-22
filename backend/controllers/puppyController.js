@@ -6,6 +6,7 @@ module.exports = {
   findAllpuppies: function(req, res){
     db.Puppy
       .find({})
+      .sort({createdAt: -1})
       .then(dbModel =>{
         res.setHeader("Description", "Retrieved all puppies.");
         res.setHeader("X-Total-Count", dbModel.length);
