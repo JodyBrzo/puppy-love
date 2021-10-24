@@ -7,22 +7,26 @@ router.route("/")
 router.route("/add")
 .post(puppyController.createPuppy);  
 
-// router.route("/:puppyId")
-// .get(puppyController.findPuppyById)  
-// .put(puppyController.updatePuppyById)  
-// .delete(puppyController.removePuppyById);  
+router.route("/:puppyId")
+.get(puppyController.findPuppyById)  
+.put(puppyController.updatePuppyById)  
+.delete(puppyController.removePuppyById);  
 
-// router.route("/:puppyId/temp")
-// .get(puppyController.findAllTempsByPuppy) 
-// .put(puppyController.updateTempByPuppy) 
-// .post(puppyController.addTempToPuppy)  
-// .delete(puppyController.removeTempFromPuppy);
+router.route("/:puppyId/temp")
+.get(puppyController.findAllTempsByPuppy) 
+.post(puppyController.addTempToPuppy)  
 
-// router.route("/:puppyId/weight")
-// .get(puppyController.findAllWeightsByPuppy) 
-// .put(puppyController.updateWeightByPuppy) 
-// .post(puppyController.addWeightToPuppy)  
-// .delete(puppyController.removeWeightFromPuppy);
+router.route("/:puppyId/temp/:tempId")
+.put(puppyController.updateTempByPuppy) 
+.delete(puppyController.removeTempFromPuppy);
+
+router.route("/:puppyId/weight")
+.get(puppyController.findAllWeightsByPuppy) 
+.post(puppyController.addWeightToPuppy)  
+
+router.route("/:puppyId/weight/:tempId")
+.put(puppyController.updateWeightByPuppy) 
+.delete(puppyController.removeWeightFromPuppy);
 
 // router.route("/:puppyId/furDescription")
 // .get(puppyController.findAllfurDescriptionsByPuppy) 

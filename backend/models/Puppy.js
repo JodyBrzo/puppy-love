@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const TempSchema = new Schema({
   date: {type: Date, required: true},
-  tempature: {type: Number, required: true},
+  temperature: {type: Number, required: true},
   notes: {type: String}
 });
 
@@ -62,7 +62,7 @@ const MilkSupplementSchema = new Schema({
 
 const VaccineSchema = new Schema({
   date: {type: Date, required: true},
-  vacciineName: {type: String, required: true},
+  vaccineName: {type: String, required: true},
   dose: {type: Number, required: true},
   notes: {type: String}
 });
@@ -73,20 +73,20 @@ const VetCheckSchema = new Schema({
 });
 
 const NotesSchema = new Schema({
-  date: {type: Date, required: true},
+  date: {type: Date, required: [true, 'Please pick a date']},
   note: {type: String}
 });
 
 const PuppySchema = new Schema ({
-  name: {type: String, required: true},
+  name: {type: String, required: [true, 'Please enter a name']},
   gender: {
     type: String,
     enum: ['Male', 'Female'], 
     required: true
   },
-  mother: {type: String, required: true},
-  father: {type: String, required: true},
-  birthDate: {type: Date, required: true},
+  mother: {type: String, required: [true, 'Please enter a name']},
+  father: {type: String, required: [true, 'Please enter a name']},
+  birthDate: {type: Date, required: [true, 'Please pick a date']},
   deceasedDate:{type: Date},
   microchip: {type: MicrochipSchema},
   owner: {
@@ -100,17 +100,17 @@ const PuppySchema = new Schema ({
     postal: {type: String},
     country: {type: String}
   },
-  tempature: [{type: TempSchema}],
-  weight: [{type: WeightSchema}],
-  furDescription: [{type: FurDescriptionSchema}],
+  temperatures: [{type: TempSchema}],
+  weights: [{type: WeightSchema}],
+  furDescriptions: [{type: FurDescriptionSchema}],
   umbilicus: [{type: UmbilicusSchema}],
   eyes: [{type: EyesSchema}],
   ears: [{type: EarsSchema}],
   nails: [{type: NailsSchema}],
-  medication: [{type: MedicationSchema}],
-  milkSuppliment: [{type: MilkSupplementSchema}],
-  vaccine: [{type: VaccineSchema}],
-  vetCheck: [{type: VetCheckSchema}],
+  medications: [{type: MedicationSchema}],
+  milkSupplements: [{type: MilkSupplementSchema}],
+  vaccines: [{type: VaccineSchema}],
+  vetChecks: [{type: VetCheckSchema}],
   notes: [{type: NotesSchema}]
 }, {timestamps: {} } );
 
