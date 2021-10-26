@@ -113,5 +113,41 @@ export default {
   },
   removeMilkSupplementFromPuppy: function(puppyId, milkSupplementId) {
     return axios.delete(`/api/puppies/${puppyId}/milkSupplement/${milkSupplementId}`)
+  },
+  addVaccineToPuppy: function(puppyId, vaccine) {
+    return axios.post(`/api/puppies/${puppyId}/vaccine`, vaccine)
+  },
+  findAllVaccinesByPuppy: function(puppyId) {
+    return axios.get(`/api/puppies/${puppyId}/vaccine`)
+  },
+  updateVaccineByPuppy: function(puppyId, vaccineId, vaccine) {
+    return axios.put(`/api/puppies/${puppyId}/vaccine/${vaccineId}`, vaccine)
+  },
+  removeVaccineFromPuppy: function(puppyId, vaccineId) {
+    return axios.delete(`/api/puppies/${puppyId}/vaccine/${vaccineId}`)
+  },
+  addVetCheckToPuppy: function(puppyId, vetCheck) {
+    return axios.post(`/api/puppies/${puppyId}/vetCheck`, vetCheck)
+  },
+  findAllVetChecksByPuppy: function(puppyId) {
+    return axios.get(`/api/puppies/${puppyId}/vetCheck`)
+  },
+  updateVetCheckByPuppy: function(puppyId, vetCheckId, vetCheck) {
+    return axios.put(`/api/puppies/${puppyId}/vetCheck/${vetCheckId}`, vetCheck)
+  },
+  removeVetCheckFromPuppy: function(puppyId, vetCheckId) {
+    return axios.delete(`/api/puppies/${puppyId}/vetCheck/${vetCheckId}`)
+  },
+  addNotesToPuppy: function(puppyId, notes) {
+    return axios.post(`/api/puppies/${puppyId}/notes`, notes)
+  },
+  findAllNotessByPuppy: function(puppyId) {
+    return axios.get(`/api/puppies/${puppyId}/notes`)
+  },
+  updateNotesByPuppy: function(puppyId, notesId, notes) {
+    return axios.put(`/api/puppies/${puppyId}/notes/${notesId}`, notes)
+  },
+  removeNotesFromPuppy: function(puppyId, notesId) {
+    return axios.delete(`/api/puppies/${puppyId}/notes/${notesId}`)
   }
 }

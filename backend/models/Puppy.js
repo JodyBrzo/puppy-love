@@ -49,21 +49,21 @@ const NailsSchema = new Schema({
 const MedicationSchema = new Schema({
   date: {type: Date, required: true},
   medicationName: {type: String, required: true},
-  doseAmount: {type: Number, required: true},
+  doseAmount: {type: String, required: true},
   notes: {type: String}
 });
 
 const MilkSupplementSchema = new Schema({
   date: {type: Date, required: true},
   supplimentName: {type: String, required: true},
-  amount: {type: Number, required: true},
+  amount: {type: String, required: true},
   notes: {type: String}
 });
 
 const VaccineSchema = new Schema({
   date: {type: Date, required: true},
   vaccineName: {type: String, required: true},
-  dose: {type: Number, required: true},
+  dose: {type: String},
   notes: {type: String}
 });
 

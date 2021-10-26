@@ -84,22 +84,28 @@ router.route("/:puppyId/milkSupplement/:milkSupplementId")
 .put(puppyController.updateMilkSupplementByPuppy) 
 .delete(puppyController.removeMilkSupplementFromPuppy);
 
-// router.route("/:puppyId/vaccine")
-// .get(puppyController.findAllVaccinesByPuppy) 
-// .put(puppyController.updateVaccineByPuppy) 
-// .post(puppyController.addVaccineToPuppy)  
-// .delete(puppyController.removeVaccineFromPuppy);
+router.route("/:puppyId/vaccine")
+.post(puppyController.addVaccineToPuppy) 
+.get(puppyController.findAllVaccinesByPuppy) 
 
-// router.route("/:puppyId/vetCheck")
-// .get(puppyController.findAllVetChecksByPuppy) 
-// .put(puppyController.updateVetCheckByPuppy) 
-// .post(puppyController.addVetCheckToPuppy)  
-// .delete(puppyController.removeVetCheckFromPuppy);
+router.route("/:puppyId/vaccine/:vaccineId")
+.put(puppyController.updateVaccineByPuppy)  
+.delete(puppyController.removeVaccineFromPuppy);
 
-// router.route("/:puppyId/notes")
-// .get(puppyController.findAllNotesByPuppy) 
-// .put(puppyController.updateNotesByPuppy) 
-// .post(puppyController.addNotesToPuppy)  
-// .delete(puppyController.removeNotesFromPuppy);
+router.route("/:puppyId/vetCheck")
+.post(puppyController.addVetCheckToPuppy)  
+.get(puppyController.findAllVetChecksByPuppy) 
+
+router.route("/:puppyId/vetCheck/:vetCheckId")
+.put(puppyController.updateVetCheckByPuppy) 
+.delete(puppyController.removeVetCheckFromPuppy);
+
+router.route("/:puppyId/note")
+.post(puppyController.addNoteToPuppy)  
+.get(puppyController.findAllNotesByPuppy) 
+
+router.route("/:puppyId/note/:noteId")
+.put(puppyController.updateNoteByPuppy) 
+.delete(puppyController.removeNoteFromPuppy);
 
 module.exports = router;
