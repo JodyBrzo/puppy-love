@@ -24,15 +24,17 @@ router.route("/:puppyId/weight")
 .get(puppyController.findAllWeightsByPuppy) 
 .post(puppyController.addWeightToPuppy)  
 
-router.route("/:puppyId/weight/:tempId")
+router.route("/:puppyId/weight/:weightId")
 .put(puppyController.updateWeightByPuppy) 
 .delete(puppyController.removeWeightFromPuppy);
 
-// router.route("/:puppyId/furDescription")
-// .get(puppyController.findAllfurDescriptionsByPuppy) 
-// .put(puppyController.updatefurDescriptionByPuppy) 
-// .post(puppyController.addfurDescriptionToPuppy)  
-// .delete(puppyController.removefurDescriptionFromPuppy);
+router.route("/:puppyId/furDescription")
+.get(puppyController.findAllFurDescriptionsByPuppy) 
+.post(puppyController.addFurDescriptionToPuppy)  
+
+router.route("/:puppyId/furDescription/:furDescriptionId")
+.put(puppyController.updateFurDescriptionByPuppy) 
+.delete(puppyController.removeFurDescriptionFromPuppy);
 
 // router.route("/:puppyId/umbilicus")
 // .get(puppyController.findAllUmbilicusesByPuppy) 
