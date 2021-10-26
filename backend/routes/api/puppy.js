@@ -17,7 +17,8 @@ router.route("/:puppyId/temp")
 .post(puppyController.addTempToPuppy)  
 
 router.route("/:puppyId/temp/:tempId")
-.put(puppyController.updateTempByPuppy) 
+.put(puppyController.updateTempByPuppy)
+.get(puppyController.findTempByPuppy) 
 .delete(puppyController.removeTempFromPuppy);
 
 router.route("/:puppyId/weight")
@@ -26,6 +27,7 @@ router.route("/:puppyId/weight")
 
 router.route("/:puppyId/weight/:weightId")
 .put(puppyController.updateWeightByPuppy) 
+.get(puppyController.findWeightByPuppy) 
 .delete(puppyController.removeWeightFromPuppy);
 
 router.route("/:puppyId/furDescription")
@@ -34,6 +36,7 @@ router.route("/:puppyId/furDescription")
 
 router.route("/:puppyId/furDescription/:furDescriptionId")
 .put(puppyController.updateFurDescriptionByPuppy) 
+.get(puppyController.findFurDescriptionByPuppy) 
 .delete(puppyController.removeFurDescriptionFromPuppy);
 
 router.route("/:puppyId/umbilicus")
@@ -42,6 +45,7 @@ router.route("/:puppyId/umbilicus")
 
 router.route("/:puppyId/umbilicus/:umbilicusId")
 .put(puppyController.updateUmbilicusByPuppy) 
+.get(puppyController.findUmbilicusByPuppy) 
 .delete(puppyController.removeUmbilicusFromPuppy);
 
 router.route("/:puppyId/eye")
@@ -50,6 +54,7 @@ router.route("/:puppyId/eye")
 
 router.route("/:puppyId/eye/:eyeId")
 .put(puppyController.updateEyeByPuppy) 
+.get(puppyController.findEyeByPuppy) 
 .delete(puppyController.removeEyeFromPuppy);
 
 router.route("/:puppyId/ear")
@@ -58,6 +63,7 @@ router.route("/:puppyId/ear")
 
 router.route("/:puppyId/ear/:earId")
 .put(puppyController.updateEarByPuppy) 
+.get(puppyController.findEarByPuppy) 
 .delete(puppyController.removeEarFromPuppy);
 
 router.route("/:puppyId/nail")
@@ -66,6 +72,7 @@ router.route("/:puppyId/nail")
 
 router.route("/:puppyId/nail/:nailId")
 .put(puppyController.updateNailByPuppy) 
+.get(puppyController.findNailByPuppy) 
 .delete(puppyController.removeNailFromPuppy);
 
 router.route("/:puppyId/medication")
@@ -74,6 +81,7 @@ router.route("/:puppyId/medication")
 
 router.route("/:puppyId/medication/:medicationId")
 .put(puppyController.updateMedicationByPuppy) 
+.get(puppyController.findMedicationByPuppy) 
 .delete(puppyController.removeMedicationFromPuppy);
 
 router.route("/:puppyId/milkSupplement")
@@ -81,7 +89,8 @@ router.route("/:puppyId/milkSupplement")
 .post(puppyController.addMilkSupplementToPuppy) 
 
 router.route("/:puppyId/milkSupplement/:milkSupplementId")
-.put(puppyController.updateMilkSupplementByPuppy) 
+.put(puppyController.updateMilkSupplementByPuppy)
+.get(puppyController.findMilkSupplementByPuppy) 
 .delete(puppyController.removeMilkSupplementFromPuppy);
 
 router.route("/:puppyId/vaccine")
@@ -89,7 +98,8 @@ router.route("/:puppyId/vaccine")
 .get(puppyController.findAllVaccinesByPuppy) 
 
 router.route("/:puppyId/vaccine/:vaccineId")
-.put(puppyController.updateVaccineByPuppy)  
+.put(puppyController.updateVaccineByPuppy) 
+.get(puppyController.findVaccineByPuppy) 
 .delete(puppyController.removeVaccineFromPuppy);
 
 router.route("/:puppyId/vetCheck")
@@ -98,6 +108,7 @@ router.route("/:puppyId/vetCheck")
 
 router.route("/:puppyId/vetCheck/:vetCheckId")
 .put(puppyController.updateVetCheckByPuppy) 
+.get(puppyController.findVetCheckByPuppy) 
 .delete(puppyController.removeVetCheckFromPuppy);
 
 router.route("/:puppyId/note")
@@ -106,6 +117,7 @@ router.route("/:puppyId/note")
 
 router.route("/:puppyId/note/:noteId")
 .put(puppyController.updateNoteByPuppy) 
+.get(puppyController.findNoteByPuppy) 
 .delete(puppyController.removeNoteFromPuppy);
 
 module.exports = router;
