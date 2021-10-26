@@ -53,5 +53,30 @@ export default {
   },
   removeFurDescriptionFromPuppy: function(puppyId, furDescriptionId) {
     return axios.delete(`/api/puppies/${puppyId}/furDescription/${furDescriptionId}`)
-  }
+  },
+  addFurUmbilicusToPuppy: function(puppyId, furUmbilicus) {
+    return axios.post(`/api/puppies/${puppyId}/furUmbilicus`, furUmbilicus)
+  },
+  findAllFurUmbilicusByPuppy: function(puppyId) {
+    return axios.get(`/api/puppies/${puppyId}/furUmbilicus`)
+  },
+  updateFurUmbilicusByPuppy: function(puppyId, furUmbilicusId, furUmbilicus) {
+    return axios.put(`/api/puppies/${puppyId}/furUmbilicus/${furUmbilicusId}`, furUmbilicus)
+  },
+  removeFurUmbilicusFromPuppy: function(puppyId, furUmbilicusId) {
+    return axios.delete(`/api/puppies/${puppyId}/furUmbilicus/${furUmbilicusId}`)
+  },
+  addEyesToPuppy: function(puppyId, eye) {
+    return axios.post(`/api/puppies/${puppyId}/eye`, eye)
+  },
+  findAllEyesByPuppy: function(puppyId) {
+    return axios.get(`/api/puppies/${puppyId}/eye`)
+  },
+  updateEyeByPuppy: function(puppyId, eyeId, eye) {
+    return axios.put(`/api/puppies/${puppyId}/eye/${eyeId}`, eye)
+  },
+  removeEyeFromPuppy: function(puppyId, eyeId) {
+    return axios.delete(`/api/puppies/${puppyId}/eye/${eyeId}`)
+  },
+
 }

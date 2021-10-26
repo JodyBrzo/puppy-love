@@ -36,17 +36,21 @@ router.route("/:puppyId/furDescription/:furDescriptionId")
 .put(puppyController.updateFurDescriptionByPuppy) 
 .delete(puppyController.removeFurDescriptionFromPuppy);
 
-// router.route("/:puppyId/umbilicus")
-// .get(puppyController.findAllUmbilicusesByPuppy) 
-// .put(puppyController.updateUmbilicusByPuppy) 
-// .post(puppyController.addUmbilicusToPuppy)  
-// .delete(puppyController.removeUmbilicusFromPuppy);
+router.route("/:puppyId/umbilicus")
+.get(puppyController.findAllUmbilicusByPuppy) 
+.post(puppyController.addUmbilicusToPuppy)  
 
-// router.route("/:puppyId/eyes")
-// .get(puppyController.findAllEyesByPuppy) 
-// .put(puppyController.updateEyesByPuppy) 
-// .post(puppyController.addEyesToPuppy)  
-// .delete(puppyController.removeEyesFromPuppy);
+router.route("/:puppyId/umbilicus/:umbilicusId")
+.put(puppyController.updateUmbilicusByPuppy) 
+.delete(puppyController.removeUmbilicusFromPuppy);
+
+router.route("/:puppyId/eye")
+.get(puppyController.findAllEyesByPuppy)
+.post(puppyController.addEyesToPuppy)  
+
+router.route("/:puppyId/eye/:eyeId")
+.put(puppyController.updateEyeByPuppy) 
+.delete(puppyController.removeEyeFromPuppy);
 
 // router.route("/:puppyId/ears")
 // .get(puppyController.findAllEarsByPuppy) 
