@@ -78,5 +78,40 @@ export default {
   removeEyeFromPuppy: function(puppyId, eyeId) {
     return axios.delete(`/api/puppies/${puppyId}/eye/${eyeId}`)
   },
-
+  addNailsToPuppy: function(puppyId, nail) {
+    return axios.post(`/api/puppies/${puppyId}/nail`, nail)
+  },
+  findAllNailsByPuppy: function(puppyId) {
+    return axios.get(`/api/puppies/${puppyId}/nail`)
+  },
+  updateNailByPuppy: function(puppyId, nailId, nail) {
+    return axios.put(`/api/puppies/${puppyId}/nail/${nailId}`, nail)
+  },
+  removeNailFromPuppy: function(puppyId, nailId) {
+    return axios.delete(`/api/puppies/${puppyId}/nail/${nailId}`)
+  },
+  addMedicationToPuppy: function(puppyId, medication) {
+    return axios.post(`/api/puppies/${puppyId}/medication`, medication)
+  },
+  findAllMedicationsByPuppy: function(puppyId) {
+    return axios.get(`/api/puppies/${puppyId}/medication`)
+  },
+  updateMedicationByPuppy: function(puppyId, medicationId, medication) {
+    return axios.put(`/api/puppies/${puppyId}/medication/${medicationId}`, medication)
+  },
+  removeMedicationFromPuppy: function(puppyId, medicationId) {
+    return axios.delete(`/api/puppies/${puppyId}/medication/${medicationId}`)
+  },
+  addMilkSupplementToPuppy: function(puppyId, milkSupplement) {
+    return axios.post(`/api/puppies/${puppyId}/milkSupplement`, milkSupplement)
+  },
+  findAllMilkSupplementsByPuppy: function(puppyId) {
+    return axios.get(`/api/puppies/${puppyId}/milkSupplement`)
+  },
+  updateMilkSupplementByPuppy: function(puppyId, milkSupplementId, milkSupplement) {
+    return axios.put(`/api/puppies/${puppyId}/milkSupplement/${milkSupplementId}`, milkSupplement)
+  },
+  removeMilkSupplementFromPuppy: function(puppyId, milkSupplementId) {
+    return axios.delete(`/api/puppies/${puppyId}/milkSupplement/${milkSupplementId}`)
+  }
 }

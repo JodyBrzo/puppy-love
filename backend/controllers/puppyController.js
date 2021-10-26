@@ -329,6 +329,215 @@ module.exports = {
       const errors = module.exports.handleError(err)
       res.status(422).json({errors})
     });
+  },
+  addEarToPuppy: function(req, res){
+    db.Puppy
+    .findOneAndUpdate({_id: req.params.puppyId}, {$push: {'ears': req.body}}, {new: true})
+    .then(dbModel => {
+      if (dbModel === null){
+        res.status(404).json({status:"Puppy not found."});
+      }
+      res.status(200).json(dbModel.ears.slice(-1));
+    })
+      .catch(err => {
+      const errors = module.exports.handleError(err)
+      res.status(422).json({errors})
+    });
+  },
+  findAllEarsByPuppy: function(req, res){
+    db.Puppy
+    .findOne({_id: req.params.puppyId})
+    .then(dbModel => {
+      if (dbModel === null){
+        res.status(404).json({status:"Puppy not found."});
+      }
+      res.status(200).json(dbModel.ears);
+      })
+    .catch(err => {
+      const errors = module.exports.handleError(err)
+      res.status(422).json({errors})
+    });
+  },
+  updateEarByPuppy: function(req, res){
+    db.Puppy
+    .findOneAndUpdate({_id: req.params.puppyId, "ears._id": req.params.earId}, {$set: {"ears.$": req.body}}, {new: true})
+    .then(dbModel => {
+      if (dbModel === null){
+        res.status(404).json({status:"Puppy ear or puppy not found."});
+      }
+      const ear = dbModel.ears.find(ear => ear._id.equals(mongoose.Types.ObjectId(req.params.earId)));
+      res.status(200).json(ear);
+      })
+    .catch(err => {
+      console.log(err);
+      res.status(422).json({status: "Invalid puppy data sent to server."});
+    });
+  },
+  removeEarFromPuppy: function(req, res){
+    db.Puppy
+    .findOneAndUpdate({_id: req.params.puppyId}, {$pull: {'ears': {'_id': req.params.tempId}}})
+    .then(() => res.json('Puppy ear deleted!'))
+    .catch(err => {
+      const errors = module.exports.handleError(err)
+      res.status(422).json({errors})
+    });
+  },
+  addNailToPuppy: function(req, res){
+    db.Puppy
+    .findOneAndUpdate({_id: req.params.puppyId}, {$push: {'nails': req.body}}, {new: true})
+    .then(dbModel => {
+      if (dbModel === null){
+        res.status(404).json({status:"Puppy not found."});
+      }
+      res.status(200).json(dbModel.nails.slice(-1));
+    })
+      .catch(err => {
+      const errors = module.exports.handleError(err)
+      res.status(422).json({errors})
+    });
+  },
+  findAllNailsByPuppy: function(req, res){
+    db.Puppy
+    .findOne({_id: req.params.puppyId})
+    .then(dbModel => {
+      if (dbModel === null){
+        res.status(404).json({status:"Puppy not found."});
+      }
+      res.status(200).json(dbModel.nails);
+      })
+    .catch(err => {
+      const errors = module.exports.handleError(err)
+      res.status(422).json({errors})
+    });
+  },
+  updateNailByPuppy: function(req, res){
+    db.Puppy
+    .findOneAndUpdate({_id: req.params.puppyId, "nails._id": req.params.nailId}, {$set: {"nails.$": req.body}}, {new: true})
+    .then(dbModel => {
+      if (dbModel === null){
+        res.status(404).json({status:"Puppy nail or puppy not found."});
+      }
+      const nail = dbModel.nails.find(nail => nail._id.equals(mongoose.Types.ObjectId(req.params.nailId)));
+      res.status(200).json(nail);
+      })
+    .catch(err => {
+      console.log(err);
+      res.status(422).json({status: "Invalid puppy data sent to server."});
+    });
+  },
+  removeNailFromPuppy: function(req, res){
+    db.Puppy
+    .findOneAndUpdate({_id: req.params.puppyId}, {$pull: {'nails': {'_id': req.params.nailId}}})
+    .then(() => res.json('Puppy nail deleted!'))
+    .catch(err => {
+      const errors = module.exports.handleError(err)
+      res.status(422).json({errors})
+    });
+  },
+  addMedicationToPuppy: function(req, res){
+    db.Puppy
+    .findOneAndUpdate({_id: req.params.puppyId}, {$push: {'medications': req.body}}, {new: true})
+    .then(dbModel => {
+      if (dbModel === null){
+        res.status(404).json({status:"Puppy not found."});
+      }
+      res.status(200).json(dbModel.medications.slice(-1));
+    })
+      .catch(err => {
+      const errors = module.exports.handleError(err)
+      res.status(422).json({errors})
+    });
+  },
+  findAllMedicationsByPuppy: function(req, res){
+    db.Puppy
+    .findOne({_id: req.params.puppyId})
+    .then(dbModel => {
+      if (dbModel === null){
+        res.status(404).json({status:"Puppy not found."});
+      }
+      res.status(200).json(dbModel.medications);
+      })
+    .catch(err => {
+      const errors = module.exports.handleError(err)
+      res.status(422).json({errors})
+    });
+  },
+  updateMedicationByPuppy: function(req, res){
+    db.Puppy
+    .findOneAndUpdate({_id: req.params.puppyId, "medications._id": req.params.medicationId}, {$set: {"medications.$": req.body}}, {new: true})
+    .then(dbModel => {
+      if (dbModel === null){
+        res.status(404).json({status:"Puppy medication or puppy not found."});
+      }
+      const medication = dbModel.medications.find(medication => medication._id.equals(mongoose.Types.ObjectId(req.params.medicationId)));
+      res.status(200).json(medication);
+      })
+    .catch(err => {
+      console.log(err);
+      res.status(422).json({status: "Invalid puppy data sent to server."});
+    });
+  },
+  removeMedicationFromPuppy: function(req, res){
+    db.Puppy
+    .findOneAndUpdate({_id: req.params.puppyId}, {$pull: {'medications': {'_id': req.params.medicationId}}})
+    .then(() => res.json('Puppy medication deleted!'))
+    .catch(err => {
+      const errors = module.exports.handleError(err)
+      res.status(422).json({errors})
+    });
+  },
+  addMilkSupplementToPuppy: function(req, res){
+    db.Puppy
+    .findOneAndUpdate({_id: req.params.puppyId}, {$push: {'milkSupplements': req.body}}, {new: true})
+    .then(dbModel => {
+      if (dbModel === null){
+        res.status(404).json({status:"Puppy not found."});
+      }
+      res.status(200).json(dbModel.milkSupplements.slice(-1));
+    })
+      .catch(err => {
+      const errors = module.exports.handleError(err)
+      res.status(422).json({errors})
+    });
+  },
+  findAllMilkSupplementsByPuppy: function(req, res){
+    db.Puppy
+    .findOne({_id: req.params.puppyId})
+    .then(dbModel => {
+      if (dbModel === null){
+        res.status(404).json({status:"Puppy not found."});
+      }
+      res.status(200).json(dbModel.milkSupplements);
+      })
+    .catch(err => {
+      const errors = module.exports.handleError(err)
+      res.status(422).json({errors})
+    });
+  },
+  updateMilkSupplementByPuppy: function(req, res){
+    db.Puppy
+    .findOneAndUpdate({_id: req.params.puppyId, "milkSupplements._id": req.params.milkSupplementId}, {$set: {"milkSupplements.$": req.body}}, {new: true})
+    .then(dbModel => {
+      if (dbModel === null){
+        res.status(404).json({status:"Puppy milkSupplement or puppy not found."});
+      }
+      const milkSupplement = dbModel.milkSupplements.find(milkSupplement => milkSupplement._id.equals(mongoose.Types.ObjectId(req.params.milkSupplementId)));
+      res.status(200).json(milkSupplement);
+      })
+    .catch(err => {
+      console.log(err);
+      res.status(422).json({status: "Invalid puppy data sent to server."});
+    });
+  },
+  removeMilkSupplementFromPuppy: function(req, res){
+    db.Puppy
+    .findOneAndUpdate({_id: req.params.puppyId}, {$pull: {'milkSupplements': {'_id': req.params.milkSupplementId}}})
+    .then(() => res.json('Puppy milkSupplement deleted!'))
+    .catch(err => {
+      const errors = module.exports.handleError(err)
+      res.status(422).json({errors})
+    });
   }
+
 
 }

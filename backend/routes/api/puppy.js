@@ -52,29 +52,37 @@ router.route("/:puppyId/eye/:eyeId")
 .put(puppyController.updateEyeByPuppy) 
 .delete(puppyController.removeEyeFromPuppy);
 
-// router.route("/:puppyId/ears")
-// .get(puppyController.findAllEarsByPuppy) 
-// .put(puppyController.updateEarsByPuppy) 
-// .post(puppyController.addEarsToPuppy)  
-// .delete(puppyController.removeEarsFromPuppy);
+router.route("/:puppyId/ear")
+.get(puppyController.findAllEarsByPuppy)
+.post(puppyController.addEarToPuppy)  
 
-// router.route("/:puppyId/nails")
-// .get(puppyController.findAllNailsByPuppy) 
-// .put(puppyController.updateNailsByPuppy) 
-// .post(puppyController.addNailsToPuppy)  
-// .delete(puppyController.removeNailsFromPuppy);
+router.route("/:puppyId/ear/:earId")
+.put(puppyController.updateEarByPuppy) 
+.delete(puppyController.removeEarFromPuppy);
 
-// router.route("/:puppyId/medication")
-// .get(puppyController.findAllMedicationsByPuppy) 
-// .put(puppyController.updateMedicationByPuppy) 
-// .post(puppyController.addMedicationToPuppy)  
-// .delete(puppyController.removeMedicationFromPuppy);
+router.route("/:puppyId/nail")
+.get(puppyController.findAllNailsByPuppy)
+.post(puppyController.addNailToPuppy)  
 
-// router.route("/:puppyId/milkSupplement")
-// .get(puppyController.findAllMilkSupplementsByPuppy) 
-// .put(puppyController.updateMilkSupplementByPuppy) 
-// .post(puppyController.addMilkSupplementToPuppy)  
-// .delete(puppyController.removeMilkSupplementFromPuppy);
+router.route("/:puppyId/nail/:nailId")
+.put(puppyController.updateNailByPuppy) 
+.delete(puppyController.removeNailFromPuppy);
+
+router.route("/:puppyId/medication")
+.get(puppyController.findAllMedicationsByPuppy)
+.post(puppyController.addMedicationToPuppy)  
+
+router.route("/:puppyId/medication/:medicationId")
+.put(puppyController.updateMedicationByPuppy) 
+.delete(puppyController.removeMedicationFromPuppy);
+
+router.route("/:puppyId/milkSupplement")
+.get(puppyController.findAllMilkSupplementsByPuppy) 
+.post(puppyController.addMilkSupplementToPuppy) 
+
+router.route("/:puppyId/milkSupplement/:milkSupplementId")
+.put(puppyController.updateMilkSupplementByPuppy) 
+.delete(puppyController.removeMilkSupplementFromPuppy);
 
 // router.route("/:puppyId/vaccine")
 // .get(puppyController.findAllVaccinesByPuppy) 
