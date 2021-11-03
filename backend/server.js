@@ -3,7 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const routes = require("./routes");
 
-require('dotenv').config();
+require('dotenv-flow').config();
 
 const app = express();
 const port = process.env.PORT || 5001;
@@ -11,7 +11,7 @@ const port = process.env.PORT || 5001;
 app.use(cors());
 app.use(express.json());
 
-const uri = process.env.ATLAS_URI;
+const uri = process.env.DBHOST;
 console.log ("atlas connection:---- " + uri);
 mongoose.connect(uri, {useNewUrlParser: true});
 
@@ -22,6 +22,8 @@ connection.once('open', () => {
 
 app.use(routes);
 
-app.listen (port, () => {
+module.exports = app.listen (port, () => {
     console.log(`listening on port: ${port}`);
 });
+
+module.exports = app;
